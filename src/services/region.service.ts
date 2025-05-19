@@ -12,19 +12,29 @@ export const getAllRegions = async () => {
 export const getRegionById = async (id: string) => {
   const region = await Region.findById(id);
 
-  if(!region) {
+  if (!region) {
     throw new AppError('Region not found', 404);
   }
-  
+
   return region;
 };
 
 export const updateRegion = async (id: string, data: any) => {
-  const response = await Region.findByIdAndUpdate(id, data, { new: true });
+  const responseUpdate = await Region.findByIdAndUpdate(id, data, { new: true });
 
-  if(!response) {
-    throw new AppError('Region not found', 404);
+  if (!responseUpdate) {
+    throw new AppError('Region not found', 404)
   }
-  
-  return response;
+
+  return responseUpdate;
+};
+
+export const deleteRegion = async (id: string) => {
+  const responseDelete = await Region.findByIdAndDelete(id);
+
+  if(!responseDelete) {
+    throw new AppError('Region not found');
+  }
+
+  return;
 };

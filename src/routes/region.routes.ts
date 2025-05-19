@@ -14,4 +14,7 @@ router.get('/:id', validateObjectId, RegionController.getById);
 
 router.put('/:id', validateObjectId, RegionController.update);
 
+router.delete('/:id', validateObjectId, RegionController.remove);
+
+
 export default router;
