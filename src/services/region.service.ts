@@ -18,3 +18,13 @@ export const getRegionById = async (id: string) => {
   
   return region;
 };
+
+export const updateRegion = async (id: string, data: any) => {
+  const response = await Region.findByIdAndUpdate(id, data, { new: true });
+
+  if(!response) {
+    throw new AppError('Region not found', 404);
+  }
+  
+  return response;
+};

@@ -12,4 +12,6 @@ router.get('/', RegionController.getAll);
 
 router.get('/:id', validateObjectId, RegionController.getById);
 
+router.put('/:id', validateObjectId, RegionController.update);
+
 export default router;
