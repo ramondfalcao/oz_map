@@ -10,3 +10,8 @@ export const getAll = async (_req: Request, res: Response) => {
   const regions = await RegionService.getAllRegions();
   res.json(regions);
 };
+
+export const getById = async (req: Request, res: Response) => {
+  const region = await RegionService.getRegionById(req.params.id);
+  res.status(200).json(region);
+};
