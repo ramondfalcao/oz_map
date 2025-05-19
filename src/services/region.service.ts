@@ -36,5 +36,5 @@ export const deleteRegion = async (id: string) => {
     throw new AppError('Region not found');
   }
 
-  return;
+  return { message: 'Deleted region!'};
 };
