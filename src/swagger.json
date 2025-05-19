@@ -9,10 +9,115 @@
       "get": {
         "summary": "Initial Endpoint",
         "responses": {
+          "200": { "description": "OK" }
+        }
+      }
+    },
+    "/api/regions": {
+      "get": {
+        "summary": "List all Regions",
+        "responses": {
           "200": {
-            "description": "OK"
+            "description": "List regions",
+            "content": {
+              "application/json": {
+                "schema": { "type": "array", "items": { "$ref": "#/components/schemas/Region" } }
+              }
+            }
           }
         }
+      },
+      "post": {
+        "summary": "Create new region",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/Region" }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Created" },
+          "400": { "description": "Validation error" }
+        }
+      }
+    },
+    "/api/regions/{id}": {
+      "get": {
+        "summary": "Search for a region by ID",
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": { "type": "string" }
+        }],
+        "responses": {
+          "200": { "description": "Region found" },
+          "404": { "description": "Not found" }
+        }
+      },
+      "put": {
+        "summary": "Update a region",
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": { "type": "string" }
+        }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/Region" }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Updated successfully" },
+          "400": { "description": "Validation error" }
+        }
+      },
+      "delete": {
+        "summary": "Delete a region",
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": { "type": "string" }
+        }],
+        "responses": {
+          "200": { "description": "Successfully deleted" },
+          "404": { "description": "Not found" }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Region": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "geometry": {
+            "type": "object",
+            "properties": {
+              "type": { "type": "string", "enum": ["Polygon"] },
+              "coordinates": {
+                "type": "array",
+                "items": {
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "items": { "type": "number" }
+                  }
+                }
+              }
+            },
+            "required": ["type", "coordinates"]
+          }
+        },
+        "required": ["name", "geometry"]
       }
     }
   }
