@@ -7,4 +7,7 @@ const router = Router();
 
 router.post('/', validateBody(regionSchema), RegionController.create);
 
+router.get('/', RegionController.getAll);
+
+
 export default router;
