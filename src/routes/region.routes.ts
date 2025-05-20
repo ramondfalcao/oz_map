@@ -4,6 +4,7 @@ import { validateBody } from '../middlewares/validateBody';
 import { regionSchema } from '../validators/region.validator';
 import { validateObjectId } from '../middlewares/validateObjectId';
 import { validateQuery } from '../middlewares/validateQuery';
+import { validateNearQuery } from '../middlewares/validateNearQuery';
 
 const router = Router();
 
@@ -12,6 +13,8 @@ router.post('/', validateBody(regionSchema), RegionController.create);
 router.get('/', RegionController.getAll);
 
 router.get('/contains-point', validateQuery, RegionController.getRegionsByPoint);
+
+router.get('/near', validateNearQuery, RegionController.getRegionsNearPoint);
 
 router.get('/:id', validateObjectId, RegionController.getById);
 
