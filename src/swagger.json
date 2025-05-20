@@ -9,7 +9,9 @@
       "get": {
         "summary": "Initial Endpoint",
         "responses": {
-          "200": { "description": "OK" }
+          "200": {
+            "description": "OK"
+          }
         }
       }
     },
@@ -21,7 +23,12 @@
             "description": "List regions",
             "content": {
               "application/json": {
-                "schema": { "type": "array", "items": { "$ref": "#/components/schemas/Region" } }
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Region"
+                  }
+                }
               }
             }
           }
@@ -33,62 +40,135 @@
           "required": true,
           "content": {
             "application/json": {
-              "schema": { "$ref": "#/components/schemas/Region" }
+              "schema": {
+                "$ref": "#/components/schemas/Region"
+              }
             }
           }
         },
         "responses": {
-          "201": { "description": "Created" },
-          "400": { "description": "Validation error" }
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Validation error"
+          }
         }
       }
     },
     "/api/regions/{id}": {
       "get": {
         "summary": "Search for a region by ID",
-        "parameters": [{
-          "name": "id",
-          "in": "path",
-          "required": true,
-          "schema": { "type": "string" }
-        }],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
-          "200": { "description": "Region found" },
-          "404": { "description": "Not found" }
+          "200": {
+            "description": "Region found"
+          },
+          "404": {
+            "description": "Not found"
+          }
         }
       },
       "put": {
         "summary": "Update a region",
-        "parameters": [{
-          "name": "id",
-          "in": "path",
-          "required": true,
-          "schema": { "type": "string" }
-        }],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
-              "schema": { "$ref": "#/components/schemas/Region" }
+              "schema": {
+                "$ref": "#/components/schemas/Region"
+              }
             }
           }
         },
         "responses": {
-          "200": { "description": "Updated successfully" },
-          "400": { "description": "Validation error" }
+          "200": {
+            "description": "Updated successfully"
+          },
+          "400": {
+            "description": "Validation error"
+          }
         }
       },
       "delete": {
         "summary": "Delete a region",
-        "parameters": [{
-          "name": "id",
-          "in": "path",
-          "required": true,
-          "schema": { "type": "string" }
-        }],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
-          "200": { "description": "Successfully deleted" },
-          "404": { "description": "Not found" }
+          "200": {
+            "description": "Successfully deleted"
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }
+    },
+    "/api/regions/contains-point": {
+      "get": {
+        "summary": "List regions containing a point",
+        "parameters": [
+          {
+            "name": "lat",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "lng",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of regions containing the point",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Region"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error"
+          }
         }
       }
     }
@@ -98,26 +178,41 @@
       "Region": {
         "type": "object",
         "properties": {
-          "name": { "type": "string" },
+          "name": {
+            "type": "string"
+          },
           "geometry": {
             "type": "object",
             "properties": {
-              "type": { "type": "string", "enum": ["Polygon"] },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "Polygon"
+                ]
+              },
               "coordinates": {
                 "type": "array",
                 "items": {
                   "type": "array",
                   "items": {
                     "type": "array",
-                    "items": { "type": "number" }
+                    "items": {
+                      "type": "number"
+                    }
                   }
                 }
               }
             },
-            "required": ["type", "coordinates"]
+            "required": [
+              "type",
+              "coordinates"
+            ]
           }
         },
-        "required": ["name", "geometry"]
+        "required": [
+          "name",
+          "geometry"
+        ]
       }
     }
   }
