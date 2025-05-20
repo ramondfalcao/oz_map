@@ -2,9 +2,11 @@ import { Request, Response } from 'express';
 import { geocodeAddress } from "../services/geolocation.service";
 import { findRegionsContainingPoint } from "../services/region.service";
 import { AppError } from '../utils/AppError';
+import logger from '../utils/logger';
 
 export const getRegionsByAddress = async (req: Request, res: Response) => {
   try {
+    logger.info('Searching regions for address...');
     const address = req.query.address as string;
 
     if (!address) {
@@ -16,6 +18,7 @@ export const getRegionsByAddress = async (req: Request, res: Response) => {
 
     res.json(regions);
   } catch (err: any) {
+    logger.error(`Error geocoding: ${err.message}`);
     throw new AppError('Error when searching for regions', 400)
   }
 };
