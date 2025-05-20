@@ -4,7 +4,7 @@ import { expect } from 'chai';
 import app from '../../app';
 import { Region } from '../../models/region.model';
 
-describe('GET /api/regions/contains-point', () => {
+describe('Integration - GET /api/regions/contains-point', () => {
   before(async () => {
     await mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/oz_map_db');
   });

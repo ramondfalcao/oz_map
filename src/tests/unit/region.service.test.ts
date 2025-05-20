@@ -3,7 +3,7 @@ import sinon from 'sinon';
 import * as RegionService from '../../services/region.service';
 import { Region } from '../../models/region.model';
 
-describe('Region Service - CRUD', () => {
+describe('Unit - Region Service - CRUD', () => {
   afterEach(() => sinon.restore());
 
   it('must create a region', async () => {
@@ -24,7 +24,7 @@ describe('Region Service - CRUD', () => {
   });
 });
 
-describe('Region Service - findRegionsNearPoint', () => {
+describe(' Unit - Region Service - findRegionsNearPoint', () => {
   afterEach(() => sinon.restore());
 
   it('should return nearby regions based on coordinates and distance', async () => {
@@ -38,7 +38,7 @@ describe('Region Service - findRegionsNearPoint', () => {
   });
 });
 
-describe('Region Service - findRegionsContainingPoint', () => {
+describe('Unit - Region Service - findRegionsContainingPoint', () => {
   afterEach(() => sinon.restore());
 
   it('should return regions that contain the point', async () => {

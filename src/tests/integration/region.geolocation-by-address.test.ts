@@ -4,7 +4,7 @@ import { expect } from 'chai';
 import app from '../../app';
 import { Region } from '../../models/region.model';
 
-describe('GET /api/regions/geolocation-by-address', () => {
+describe('Integration - GET /api/regions/geolocation-by-address', () => {
   before(async () => {
     await mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/oz_map_db');
   });

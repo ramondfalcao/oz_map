@@ -3,7 +3,7 @@ import sinon from 'sinon';
 import axios from 'axios';
 import { geocodeAddress } from '../../services/geolocation.service';
 
-describe('Geolocation Service - geocodeAddress', () => {
+describe('Unit - Geolocation Service - geocodeAddress', () => {
   afterEach(() => sinon.restore());
 
   it('must return coordinates from a valid address', async () => {
