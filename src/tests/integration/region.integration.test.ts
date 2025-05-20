@@ -21,7 +21,7 @@ const regionPayloadMock = {
   }
 };
 
-describe('Region API', () => {
+describe('Region API CRUD', () => {
   before((done) => {
     mongoose.connection.readyState === 1
       ? done()

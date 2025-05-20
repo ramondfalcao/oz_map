@@ -33,3 +33,13 @@ export const getRegionsByPoint = async (req: Request, res: Response) => {
   const regions = await RegionService.findRegionsContainingPoint(lat, lng);
   res.status(200).json(regions);
 };
+
+export const getRegionsNearPoint = async (req: Request, res: Response) => {
+  const lat = parseFloat(req.query.lat as string);
+  const lng = parseFloat(req.query.lng as string);
+  const distance = parseInt(req.query.distance as string, 10);
+
+  const regions = await RegionService.findRegionNearPoint(lat, lng, distance);
+
+  res.json(regions);
+};
