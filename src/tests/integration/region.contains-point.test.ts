@@ -59,9 +59,9 @@ describe('GET /api/regions/contains-point', () => {
     const res = await request(app).get('/api/regions/contains-point?lat=-4.5&lng=-44.5');
     expect(res.status).to.equal(200);
     expect(res.body).to.be.an('array');
-    const nomes = res.body.map((r: any) => r.name);
-    expect(nomes).to.include('Região A');
-    expect(nomes).to.include('Região B');
+    const names = res.body.map((r: any) => r.name);
+    expect(names).to.include('Região A');
+    expect(names).to.include('Região B');
   });
 
   it('should return 400 for invalid coordinates', async () => {
