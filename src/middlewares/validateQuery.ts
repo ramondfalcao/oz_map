@@ -1,5 +1,6 @@
 import Joi from 'joi';
 import { Request, Response, NextFunction } from 'express';
+import { AppError } from '../utils/AppError';
 
 const schema = Joi.object({
   lat: Joi.number().required(),
@@ -9,7 +10,8 @@ const schema = Joi.object({
 export const validateQuery = (req: Request, res: Response, next: NextFunction) => {
   const { error } = schema.validate(req.query);
   if (error) {
-    return res.status(400).json({ error: error.details[0].message });
+    throw new AppError(error?.details[0].message, 400)
   }
+
   next();
 };
