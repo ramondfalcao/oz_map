@@ -38,3 +38,16 @@ export const deleteRegion = async (id: string) => {
 
   return { message: 'Deleted region!'};
 };
+
+export const findRegionsContainingPoint = async (latitude: number, longitude: number) => {
+  return Region.find({
+    geometry: {
+      $geoIntersects: {
+        $geometry: {
+          type: 'Point',
+          coordinates: [longitude, latitude]
+        }
+      }
+    }
+  });
+};
