@@ -3,7 +3,7 @@ import sinon from 'sinon';
 import * as RegionService from '../../services/region.service';
 import { Region } from '../../models/region.model';
 
-describe('Region Service', () => {
+describe('Region Service - CRUD', () => {
   afterEach(() => sinon.restore());
 
   it('must create a region', async () => {
@@ -35,5 +35,28 @@ describe('Region Service - findRegionsNearPoint', () => {
 
     expect(stub.calledOnce).to.be.true;
     expect(result).to.deep.equal(mockRegions);
+  });
+});
+
+describe('Region Service - findRegionsContainingPoint', () => {
+  afterEach(() => sinon.restore());
+
+  it('should return regions that contain the point', async () => {
+    const mockRegions = [
+      { name: 'Região 1' },
+      { name: 'Região 2' }
+    ];
+
+    const stub = sinon.stub(Region, 'find').resolves(mockRegions as any);
+
+    const result = await RegionService.findRegionsContainingPoint(2, 1);
+    expect(result).to.deep.equal(mockRegions);
+    expect(stub.calledOnce).to.be.true;
+  });
+
+  it('should return an empty array if no region is found', async () => {
+    sinon.stub(Region, 'find').resolves([] as any);
+    const result = await RegionService.findRegionsContainingPoint(0, 0);
+    expect(result).to.deep.equal([]);
   });
 });
