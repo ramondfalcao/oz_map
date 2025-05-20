@@ -40,7 +40,7 @@ export const deleteRegion = async (id: string) => {
 };
 
 export const findRegionsContainingPoint = async (latitude: number, longitude: number) => {
-  return Region.find({
+  const response = Region.find({
     geometry: {
       $geoIntersects: {
         $geometry: {
@@ -50,4 +50,22 @@ export const findRegionsContainingPoint = async (latitude: number, longitude: nu
       }
     }
   });
+
+  return response;
 };
+
+export const findRegionNearPoint = async (latitude: number, longitude: number, distance: number) => {
+  const response =  Region.find({
+    geometry: {
+      $near: {
+        $geometry: {
+          type: 'Point',
+          coordinates: [longitude, latitude]
+        },
+        $maxDistance: distance
+      }
+    }
+  });
+
+  return response;
+}
