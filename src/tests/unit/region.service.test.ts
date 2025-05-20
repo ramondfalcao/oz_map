@@ -23,3 +23,17 @@ describe('Region Service', () => {
     expect(stub.calledOnce).to.be.true;
   });
 });
+
+describe('Region Service - findRegionsNearPoint', () => {
+  afterEach(() => sinon.restore());
+
+  it('should return nearby regions based on coordinates and distance', async () => {
+    const mockRegions = [{ name: 'Região A' }, { name: 'Região B' }];
+    const stub = sinon.stub(Region, 'find').resolves(mockRegions as any);
+
+    const result = await RegionService.findRegionNearPoint(-3, -60, 1000);
+
+    expect(stub.calledOnce).to.be.true;
+    expect(result).to.deep.equal(mockRegions);
+  });
+});
